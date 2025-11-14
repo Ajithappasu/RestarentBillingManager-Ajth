@@ -18,6 +18,7 @@
   padding: 30px;
   border-radius: 10px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 
 }
 .food {
@@ -76,6 +77,7 @@
   align-items: center;
 }
 .head2{
+padding: auto;
   
 }
 .addelements{
@@ -103,11 +105,16 @@
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
    border: 2px solid black;
    font-size:x-large;
+   -indzex:20;
+   backdrop-filter: blur(3px);
+   
+ 
 }
 .ClosePopup{
  position: absolute;
  right:0px;
  top:0px;
+ cursor: pointer;
 }
 table,tr,th,td{
   border: 1px solid black;
@@ -118,10 +125,26 @@ table,tr,th,td{
 }
 .plus{
 margin-left: 50x;
+cursor: pointer;
 }
 .generateBill{
   background-color: red;
   border-radius: 5px;
   box-shadow: 5px;
   border: 2px solid black;
+  cursor: pointer;
+}
+.minus{
+  cursor: pointer;
+}
+.remove{
+  cursor: pointer;
+}
+.temp{
+  
+     -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
 }

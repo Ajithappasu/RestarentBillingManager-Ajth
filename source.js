@@ -2,7 +2,10 @@ let dragName;
 let dragPrice ;
 let totalPrice =0;
 let db ={}
+let open =true
 function windowpopup(i, listelement){
+ //   document.getElementById('main').className="temp"
+    open = false
     console.log("clicked");
     const popup = document.createElement('div');
   //   popup.innerHTML="table"+(i+1) +"<br/>";
@@ -36,11 +39,12 @@ function windowpopup(i, listelement){
          popup.innerHTML="";
           popup.className="";
           db[i]=null;
-             listelement.innerHTML=" Total Price "+0 +"$";
-   })
+          listelement.innerHTML=" Total Price "+0 +"$";
+        open= true;
+        })
     closepop.innerHTML="x";
     closepop.addEventListener("click" ,(e)=>{
-       
+       open =true
          popup.innerHTML="";
           popup.className="";
       // popup.innerHTML="";
@@ -68,6 +72,7 @@ function windowpopup(i, listelement){
        })
        Quantityplus.className="plus";
        QuantityMinus.textContent="-";
+       QuantityMinus.className="minus"
        QuantityMinus.addEventListener("click",()=>{
         if(elementA.quantity==1){
 
@@ -80,18 +85,18 @@ function windowpopup(i, listelement){
         }
        })
        QuantityRemove.textContent="🗑";
+       QuantityRemove.className="remove";
        QuantityRemove.addEventListener("click", ()=>{
-        console.log('aj');
-        elementA.name=null
-        elementA.quantity=null
-        elementA.price=null;
+    //    console.log('aj');
+       elementA.quantity=0;
          listelement.innerHTML=" Total Price "+getTotalPrice(i) +"$";
-        render();
-        tbl.removeChild(tablerowA);
+         console.log(getTotalPrice(i));
+           tbl.removeChild(tablerowA);
+         render();
         
        }
        )
-       if(elementA.name!=null){
+      if(elementA.quantity!=0){
        tableDataName.textContent=elementA.name;
        tableDataPrice.textContent=elementA.price;
        tableDataQuantity.textContent=elementA.quantity;
@@ -137,10 +142,7 @@ function addItemToTable(tableKey, foodObject){
 function getTotalPrice(i){
     let sum =0;
 db[i].forEach(element => {
-    console.log(element.name);
-    if(element.quantity ==1){
-        sum +=element.price;
-    }else{
+  {
         sum += element.price*element.quantity;
     }
 });
@@ -183,7 +185,7 @@ function dropHandler(ev, i, listelement){
  
     listelement.innerHTML=" Total Price "+getTotalPrice(i) +"$";
 }
-let N=7
+let N=9
 let tables = [];
 let tableList =[];
 for(let i =1;i<=N;i++){
@@ -197,10 +199,14 @@ for(let i =1;i<=N;i++){
    element.addEventListener("dragover",(e)=>{ dragoverHandler(e)});
     element.addEventListener("drop", (e)=>{
         console.log("HEY DRAG ME ")
+        if(open == true){
         dropHandler(e,i-1,listelement)
+        }
     });
     element.addEventListener("click",(e)=>{
+        if(open== true){
         windowpopup(i-1,listelement);
+        }
     })
     tables.push(element);
     tableList.push(listelement);
@@ -259,10 +265,11 @@ for(let key of menus){
     element2.appendChild(foodprice);
     foods.push(element2);
     document.getElementById("foods").appendChild(element2)
-    element2.draggable=true;
+   element2.draggable=true;
     element2.addEventListener("dragstart" ,(e)=>{dragstartHandler(e, key.item, key.item_price)})
     // element2.addEventListener("drop", (e)=>{dropHandler(e)});
 }
+
 
 
 function MyFunction(){
